@@ -38,11 +38,37 @@ public class Main {
     }
 
     public static int totalProfitOnDay(int month, int day) {
-        return 1234;
+        if (month < 0 || month >= MONTHS || day < 1 || day > DAYS) return -99999;
+
+        int total = 0;
+        for (int c = 0; c < COMMS; c++) {
+            total += data[month][day][c];
+        }
+        return total;
+
     }
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
-        return 1234;
+
+        int cIdx = -1;
+        for(int i=0; i<COMMS; i++) if(commodities[i].equals(commodity)) cIdx = i;
+
+        if (cIdx == -1 || from < 1 || to > DAYS || from > to) return -99999;
+
+        int sum = 0;
+        for (int m = 0; m < MONTHS; m++) {
+            for (int d = from; d <= to; d++) {
+                sum += data[m][d][cIdx];
+            }
+        }
+        return sum;
+
+
+
+
+
+
+
     }
 
     public static int bestDayOfMonth(int month) { 
