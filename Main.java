@@ -62,17 +62,26 @@ public class Main {
             }
         }
         return sum;
-
-
-
-
-
-
-
     }
 
-    public static int bestDayOfMonth(int month) { 
-        return 1234; 
+    public static int bestDayOfMonth(int month) {
+
+        if (month < 0 || month >= MONTHS) return -1;
+
+        int bestDay = 1;
+        int maxP = -999999999;
+
+        for (int d = 1; d <= DAYS; d++) {
+            int dailyTotal = 0;
+            for (int c = 0; c < COMMS; c++) {
+                dailyTotal += data[month][d][c];
+            }
+            if (dailyTotal > maxP) {
+                maxP = dailyTotal;
+                bestDay = d;
+            }
+        }
+        return bestDay;
     }
     
     public static String bestMonthForCommodity(String comm) { 
