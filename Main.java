@@ -12,21 +12,29 @@ public class Main {
     
 
     // ======== REQUIRED METHOD LOAD DATA (Students fill this) ========
-    public static void loadData() {}
+    public static void loadData() {
+
+    }
 
     // ======== 10 REQUIRED METHODS (Students fill these) ========
 
     public static String mostProfitableCommodityInMonth(int month) {
+        if (month < 0 || month >= MONTHS) return "INVALID_MONTH";
 
+        int maxProfit = -999999999;
+        String winner = "";
 
-
-
-
-
-
-
-
-        return "DUMMY";
+        for (int c = 0; c < COMMS; c++) {
+            int currentTotal = 0;
+            for (int d = 1; d <= DAYS; d++) {
+                currentTotal += data[month][d][c];
+            }
+            if (currentTotal > maxProfit) {
+                maxProfit = currentTotal;
+                winner = commodities[c];
+            }
+        }
+        return winner + " " + maxProfit;
     }
 
     public static int totalProfitOnDay(int month, int day) {
