@@ -84,8 +84,29 @@ public class Main {
         return bestDay;
     }
     
-    public static String bestMonthForCommodity(String comm) { 
-        return "DUMMY"; 
+    public static String bestMonthForCommodity(String comm) {
+        int cIdx = -1;
+        for(int i=0; i<COMMS; i++) if(commodities[i].equals(comm)) cIdx = i;
+        if (cIdx == -1) return "INVALID_COMMODITY";
+
+        int maxP = -999999999;
+        int bestM = 0;
+        for (int m = 0; m < MONTHS; m++) {
+            int monthlyP = 0;
+            for (int d = 1; d <= DAYS; d++) {
+                monthlyP += data[m][d][cIdx];
+            }
+            if (monthlyP > maxP) {
+                maxP = monthlyP;
+                bestM = m;
+            }
+        }
+        return months[bestM];
+
+
+
+
+
     }
 
     public static int consecutiveLossDays(String comm) { 
