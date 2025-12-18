@@ -102,15 +102,29 @@ public class Main {
             }
         }
         return months[bestM];
-
-
-
-
-
     }
 
-    public static int consecutiveLossDays(String comm) { 
-        return 1234; 
+    public static int consecutiveLossDays(String comm) {
+
+        int cIdx = -1;
+        for(int i=0; i<COMMS; i++) if(commodities[i].equals(comm)) cIdx = i;
+        if (cIdx == -1) return -1;
+
+        int maxStreak = 0;
+        int currentStreak = 0;
+
+        for (int m = 0; m < MONTHS; m++) {
+            for (int d = 1; d <= DAYS; d++) {
+                if (data[m][d][cIdx] < 0) {
+                    currentStreak++;
+                    if (currentStreak > maxStreak) maxStreak = currentStreak;
+                } else {
+                    currentStreak = 0;
+                }
+            }
+        }
+        return maxStreak;
+
     }
     
     public static int daysAboveThreshold(String comm, int threshold) { 
