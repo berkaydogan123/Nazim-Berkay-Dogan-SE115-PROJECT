@@ -162,13 +162,23 @@ public class Main {
 
     }
     
-    public static String compareTwoCommodities(String c1, String c2) { 
-        return "DUMMY is better by 1234"; 
-    }
+    public static String compareTwoCommodities(String c1, String c2) {
+        int idx1 = -1, idx2 = -1;
+        for(int i=0; i<COMMS; i++) {
+            if(commodities[i].equals(c1)) idx1 = i;
+            if(commodities[i].equals(c2)) idx2 = i;
+        }
+        if (idx1 == -1 || idx2 == -1) return "INVALID_COMMODITY";
+
+        int profit1 = 0, profit2 = 0;
+        for (int m = 0; m < MONTHS; m++) {
+            for (int d = 1; d <= DAYS; d++) {
+                profit1 += data[m][d][idx1];
+                profit2 += data[m][d][idx2];
+            }
+        }
     
-    public static String bestWeekOfMonth(int month) { 
-        return "DUMMY"; 
-    }
+    public static String bestWeekOfMonth(int month) {return "DUMMY";}
 
     public static void main(String[] args) {
         loadData();
