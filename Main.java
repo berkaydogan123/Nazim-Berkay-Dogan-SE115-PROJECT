@@ -13,6 +13,52 @@ public class Main {
 
     // ======== REQUIRED METHOD LOAD DATA (Students fill this) ========
     public static void loadData() {
+        for (int i = 0; i < months.length; i++) {
+
+            String fileName = "Data_Files/" + months[i] + ".txt";
+            File file = new File(fileName);
+
+            try {
+                Scanner sc = new Scanner(file);
+                if (sc.hasNextLine()) {
+                    sc.nextLine();
+                }
+
+                while (sc.hasNextLine()) {
+                    String line = sc.nextLine();
+                    String[] parts = line.split(",");
+
+                    int day = Integer.parseInt(parts[0].trim());
+                    String name = parts[1].trim();
+                    int profit = Integer.parseInt(parts[2].trim());
+
+
+                    int cIndex = -1;
+                    for (int j = 0; j < commodities.length; j++) {
+                        if (commodities[j].equals(name)) {
+                            cIndex = j;
+                            break;
+                        }
+                    }
+
+                    if (cIndex != -1) {
+                        data[i][day][cIndex] = profit;
+                    }
+                }
+                sc.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+
+
+
+
+
+
+
+
 
     }
 
@@ -186,7 +232,7 @@ public class Main {
 
             for (int w = 0; w < 4; w++) {
                 int weekTotal = 0;
-                int startDay = (w * 7) + 1; // 1, 8, 15, 22 [cite: 9, 68]
+                int startDay = (w * 7) + 1;
                 for (int d = startDay; d < startDay + 7; d++) {
                     for (int c = 0; c < COMMS; c++) {
                         weekTotal += data[month][d][c];
