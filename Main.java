@@ -178,7 +178,28 @@ public class Main {
             }
         }
     
-    public static String bestWeekOfMonth(int month) {return "DUMMY";}
+    public static String bestWeekOfMonth(int month) {
+            if (month < 0 || month >= MONTHS) return "INVALID_MONTH";
+
+            int maxWeekProfit = -999999999;
+            int bestW = 1;
+
+            for (int w = 0; w < 4; w++) {
+                int weekTotal = 0;
+                int startDay = (w * 7) + 1; // 1, 8, 15, 22 [cite: 9, 68]
+                for (int d = startDay; d < startDay + 7; d++) {
+                    for (int c = 0; c < COMMS; c++) {
+                        weekTotal += data[month][d][c];
+                    }
+                }
+                if (weekTotal > maxWeekProfit) {
+                    maxWeekProfit = weekTotal;
+                    bestW = w + 1;
+                }
+            }
+            return "Week " + bestW;
+
+        }}
 
     public static void main(String[] args) {
         loadData();
